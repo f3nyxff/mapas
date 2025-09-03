@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meus Mapas - Craftland</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #111;
+      color: #fff;
+    }
+
+    header {
+      background: #000;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      height: 70px;
+    }
+    header img {
+      height: 40px;
+      margin-right: 15px;
+    }
+    header h2 {
+      color: #fff;
+      font-size: 1.2rem;
+    }
+
+    main {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    main h1 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .mapa {
+      background: #1e1e1e;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .mapa img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .mapa h3 { margin-bottom: 10px; }
+
+    .codigo {
+      background: #000;
+      padding: 10px;
+      border-radius: 8px;
+      font-family: monospace;
+      margin-bottom: 10px;
+      word-wrap: break-word;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 18px;
+      background: #ffcc00;
+      color: #111;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 20px;
+      transition: 0.3s;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    .btn:hover {
+      background: #ff9900;
+      transform: scale(1.05);
+    }
+
+    /* ---------- Modal ---------- */
+    .modal {
+      display: none; /* CORREÇÃO: Removida a declaração duplicada display: flex */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #1e1e1e;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      color: #ddd;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      animation: aparecer 0.3s ease;
+    }
+    .modal-content h3 {
+      margin-bottom: 15px;
+      color: #ffcc00;
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+    }
+    .close:hover { color: #ffcc00; }
+
+    @keyframes aparecer {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="download.png" alt="Craftland Creators Logo">
+    <h2>Meus mapas craftland</h2>
+  </header>
+
+  <main>
+    <h1>Mapas</h1>
+
+    <!-- Mapa 1 -->
+    <div class="mapa">
+      <img src="mapa1.jpeg" alt="Imagem do Mapa 1">
+      <h3>Mine Squad</h3>
+      <div class="codigo" id="codigo1">#FREEFIREDA4CC66A3378D622BCC2DEFE67A1B5075728</div>
+      <button class="btn" onclick="copiarCodigo('codigo1')">Copiar Código</button>
+      <button class="btn" onclick="abrirModal('modal1')">Sobre</button>
+    </div>
+
+    <!-- Mapa 2 -->
+    <div class="mapa">
+      <img src="mapa2.jpeg" alt="Imagem do Mapa 2">
+      <h3>Parkour Ben10</h3>
+      <div class="codigo" id="codigo2">#FREEFIRE20708C505880DE42EB4224722C25B8125728</div>
+      <button class="btn" onclick="copiarCodigo('codigo2')">Copiar Código</button>
+      <button class="btn" onclick="abrirModal('modal2')">Sobre</button>
+    </div>
+  </main>
+
+  <!-- Modal do Mapa 1 -->
+  <div id="modal1" class="modal">
+    <span class="close" onclick="fecharModal('modal1')">&times;</span>
+    <div class="modal-content">
+      <h3>Sobre - Mine Squad</h3>
+      <p>Um mapa feito para você se sentir no mundo de Minecraft, tire x1's épicos em um mundo pixelado.</p>
+    </div>
+  </div>
+
+  <!-- Modal do Mapa 2 -->
+  <div id="modal2" class="modal">
+    <span class="close" onclick="fecharModal('modal2')">&times;</span>
+    <div class="modal-content">
+      <h3>Sobre - Parkour Ben10</h3>
+      <p>Um parkour tematizado em Ben10, jogue e mostre suas habilidades contra obstáculos. </p>
+    </div>
+  </div>
+
+  <script>
+    // Copiar código
+    function copiarCodigo(id) {
+      const codigo = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(codigo).then(() => {
+        alert("Código copiado: " + codigo);
+      });
+    }
+
+    // Abrir modal
+    function abrirModal(id) {
+      document.getElementById(id).style.display = "flex";
+    }
+
+    // Fechar modal
+    function fecharModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    // Fechar modal clicando fora do conteúdo
+    window.onclick = function(event) {
+      const modais = document.getElementsByClassName("modal");
+      for (let m of modais) {
+        if (event.target === m) {
+          m.style.display = "none";
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
